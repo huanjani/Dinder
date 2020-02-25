@@ -33,7 +33,7 @@ class DataViz extends Component {
   onSubmit = (event) => {
     event.preventDefault();
     let soughtIngredient = this.state.soughtIngredient_name.toLowerCase()
-    axios.get(`${this.props.url}/ingredient/${soughtIngredient}/${this.state.y}`)
+    axios.get(`${this.props.url}/api/ingredient/${soughtIngredient}/${this.state.y}`)
       .then((response) => {
         console.log(response.data)
         // format for calling single ingredient: response.data.ing_data[0]
@@ -58,7 +58,7 @@ class DataViz extends Component {
   }
 
   findNewSimilarities = (ingredient) => {
-    axios.get(`${this.props.url}/ingredient/${ingredient}/${this.state.y}`)
+    axios.get(`${this.props.url}/api/ingredient/${ingredient}/${this.state.y}`)
     .then((response) => {
       console.log(response.data)
       this.setState({
