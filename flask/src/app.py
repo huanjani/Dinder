@@ -12,7 +12,7 @@ def create_app(env_name):
   app = Flask(__name__, static_url_path='')
   CORS(app, support_credentials=True)
   #app.config.from_object(app_config[env_name])
-  app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://dinderpostgres:password@database-1.cvbo289m1v6g.us-west-2.rds.amazonaws.com:5432/database-1"
+  app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://dinderpostgres:password@database-1.cvbo289m1v6g.us-west-2.rds.amazonaws.com:5432/postgres"
   app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
   app.config["DEBUG"] = True
   db.init_app(app)

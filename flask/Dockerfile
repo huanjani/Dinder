@@ -1,9 +1,6 @@
 FROM python:3
 ENV FLASK_ENV development
-
-# Is it terrible to have this db url here? How do I keep env variables like this out of the public eye with when including them for Docker? (It is also in the .env file.) Do I use .gitignore?
-
-ENV DATABASE_URL postgresql://dinderpostgres:password@database-1.cvbo289m1v6g.us-west-2.rds.amazonaws.com:5432/database-1
+ENV DATABASE_URL postgresql://dinderpostgres:password@database-1.cvbo289m1v6g.us-west-2.rds.amazonaws.com:5432/postgres
 RUN apt-get update -y && \
     apt-get install -y python-pip python-dev
 COPY . /app
@@ -12,6 +9,12 @@ RUN pip install numpy
 RUN pip install pandas
 RUN pip install -r requirements.txt
 RUN python -m textblob.download_corpora
+
 EXPOSE 5000 
+# uncomment below to populate database in first deployment
+# RUN python manage.py create_db
+# RUN python loadData.py
+# RUN python cleanText.py
+# RUN python src/connectPandas.py
 
 CMD [ "python", "run.py" ]
