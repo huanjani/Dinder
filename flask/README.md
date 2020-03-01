@@ -17,7 +17,8 @@ To set up deployment with ECS-CLI-v2:
   copy the DB URL (postgres://[user]:[password]@[hostname]:[port]/[dbname])
 -go to the manifests that were generated (ymls within 'ecs-project' directory)
   change React/front-end (webapp) base_url to '/api' in App.js
-  
+  add DATABASE_URL env var under "variables" in Flask/back-end (api-app) manifest
+  add python scripts for creating db, tables, loading data, processing data, etc to manifest
 
 
 To deploy locally with Docker:
