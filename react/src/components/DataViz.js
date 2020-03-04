@@ -106,9 +106,9 @@ class DataViz extends Component {
               type = 'range'
               axis="y"
               value={this.state.y}
-              max='.2'
+              max='.9'
               min='.01'
-              step='.01'
+              step='.05'
               onMouseUp={this.onSubmit}
               onChange={this.changeStrength}
               className='slider'

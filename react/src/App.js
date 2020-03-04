@@ -11,8 +11,10 @@ class App extends Component {
   }
 
   render() {
-    const BASE_URL = 'http://localhost:5000'
+    // const BASE_URL = 'http://localhost:5000'
     // const BASE_URL = 'https://dinder-flask.herokuapp.com'
+    const BASE_URL = '/api'
+    // 'dinde-Publi-EXUI6JTIP4L3-1856349916.us-west-2.elb.amazonaws.com/api'
 
     return (
       <div className='App'>

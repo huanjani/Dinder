@@ -12,22 +12,22 @@ def create_app(env_name):
   app = Flask(__name__, static_url_path='')
   CORS(app, support_credentials=True)
   #app.config.from_object(app_config[env_name])
-  app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://user:password@postgres:5432/pgdb"
+  app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://dinderpostgres:password@database-1.cvbo289m1v6g.us-west-2.rds.amazonaws.com:5432/postgres"
   app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
   app.config["DEBUG"] = True
   db.init_app(app)
 
-  @app.route('/', methods=['GET'])
+  @app.route('/api/', methods=['GET'])
   def index():
     return 'This index endpoint is working!'
 
-  @app.route('/ingredients')
+  @app.route('/api/ingredients')
   @cross_origin(supports_credentials=True)
   def get_all_ingredients():
     ingredients_schema = IngredientSchema(many=True)
     return jsonify(ingredients_schema.dump(Ingredient.query.limit(10).all()))
 
-  @app.route('/ingredient/<sought_ingredient>/<y>')
+  @app.route('/api/ingredient/<sought_ingredient>/<y>')
   @cross_origin(supports_credentials=True)
   def get_ingredient_by_name(sought_ingredient, y):
     ingredient_schema = IngredientSchema(many=True)
@@ -46,7 +46,7 @@ def create_app(env_name):
     print('this is the ing json', sim_results)
     return sim_results
 
-  @app.route('/recipes/')
+  @app.route('/api/recipes/')
   @cross_origin(supports_credentials=True)
   def get_matching_recipes():
     schema = RawDataSchema(many=True)
@@ -63,7 +63,7 @@ def create_app(env_name):
     return recipes_to_send
     # return jsonify(schema.dump())
 
-  @app.route('/recipe/<id>')
+  @app.route('/api/recipe/<id>')
   @cross_origin(supports_credentials=True)
   def get_recipe_by_id(id):
     schema = RawDataSchema(many=False)
@@ -71,7 +71,7 @@ def create_app(env_name):
     # print(recipe.allData)
     return jsonify(schema.dump(RawDataModel.query.get(id)))
 
-  @app.route('/json/<path:path>')
+  @app.route('/api/json/<path:path>')
   @cross_origin(supports_credentials=True)
   def get_json(path):
     return send_from_directory('data', path)
