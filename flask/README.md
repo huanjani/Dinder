@@ -18,7 +18,7 @@ To set up deployment with ECS-CLI-v2:
 -go to the manifests that were generated (ymls within 'ecs-project' directory) 
   change ports to 5000 (Flask) and 3000 (React) 
   change one of the paths so they're not both (*); in this case I changed the flask path to '/api/*'  
-  <!-- add DATABASE_URL env var under "variables" in Flask/back-end (api-app) manifest -->  
+  <!-- add DATABASE_URL env var under "variables" in Flask/back-end (api-app) manifest -->
 -change React/front-end (webapp) base_url to '/api' in App.js  
 -go to the AWS console again  
   choose ECS from the services menu  
