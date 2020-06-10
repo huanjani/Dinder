@@ -9,8 +9,8 @@ phases:
       - echo "cd into $CODEBUILD_SRC_DIR"
       - cd $CODEBUILD_SRC_DIR
       # Download the copilot linux binary.
-      - wget https://ecs-cli-v2-release.s3-us-west-2.amazonaws.com/ecs-preview-linux-v0.0.9
-      - mv ./ecs-preview-linux-v0.0.9 ./copilot-linux
+      - wget copilot-linux-v0.0.9-53-gee2217a
+      - mv ./copilot-linux-v0.0.9-53-gee2217a ./copilot-linux
       - chmod +x ./copilot-linux
   build:
     commands:
@@ -22,7 +22,7 @@ phases:
       - ls -l
       - export COLOR="false"
       # Find all the local services in the workspace.
-      - svcs=$(./copilot-linux app ls --local --json | jq '.services[].name' | sed 's/"//g')
+      - svcs=$(./copilot-linux svc ls --local --json | jq '.services[].name' | sed 's/"//g')
       # Find all the environments.
       - envs=$(./copilot-linux env ls --json | jq '.environments[].name' | sed 's/"//g')
       # Generate the cloudformation templates.
@@ -31,7 +31,7 @@ phases:
       - >
         for env in $envs; do
           for svc in $svcs; do
-          ./copilot-linux app package -n $svc -e $env --output-dir './infrastructure' --tag $tag;
+          ./copilot-linux svc package -n $svc -e $env --output-dir './infrastructure' --tag $tag;
           done;
         done;
       - ls -lah ./infrastructure
