@@ -23,4 +23,11 @@ source:
 stages:
     - # The name of the environment to deploy to.
       name: test
-    - name: quiz
+      # Optional: use test commands to validate this stage of your build.
+      test_commands: [echo 'in test env']
+
+    - # The name of the environment to deploy to.
+      name: quiz
+      # Optional: use test commands to validate this stage of your build.
+      test_commands: [echo 'in quiz env']
+
